@@ -1,1 +1,52 @@
-{"name":"My Transformation - Fitness Tracker","short_name":"Transform","description":"Offline personal fitness and progress tracker","start_url":"./index.html","scope":"./","display":"standalone","background_color":"#f3f7f4","theme_color":"#102b26","icons":[{"src":"icon.png","sizes":"192x192","type":"image/png","purpose":"any"},{"src":"icon-512.png","sizes":"512x512","type":"image/png","purpose":"any"}]}
+{
+  "id": "./",
+  "name": "Transform Pro AI - Body Transformation",
+  "short_name": "Transform Pro AI",
+  "description": "Private, offline-first fitness, nutrition and body transformation tracker.",
+  "lang": "en",
+  "dir": "ltr",
+  "start_url": "./#home",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "portrait-primary",
+  "background_color": "#0f3f36",
+  "theme_color": "#0f3f36",
+  "categories": ["fitness", "health", "lifestyle"],
+  "icons": [
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Today's Workout",
+      "short_name": "Workout",
+      "description": "Open today's training session",
+      "url": "./?view=workout#workout",
+      "icons": [{ "src": "./icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Log Progress",
+      "short_name": "Progress",
+      "description": "Add weight and waist measurements",
+      "url": "./?view=progress#progress",
+      "icons": [{ "src": "./icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}

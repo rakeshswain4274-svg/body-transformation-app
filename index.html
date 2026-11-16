@@ -1,1 +1,132 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#102b26"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icon.png"><title>My Transformation</title><style>body{font-family:-apple-system,BlinkMacSystemFont,Arial;margin:0;background:#f3f7f4;color:#16352d}header{background:#123f34;color:white;padding:28px 20px 20px}h1{margin:0;font-size:26px}small{opacity:.8}.wrap{max-width:600px;margin:auto;padding:16px 16px 90px}.card{background:white;border-radius:18px;padding:18px;margin-bottom:14px;box-shadow:0 2px 12px #143d3010}h2{font-size:18px;margin:0 0 12px}.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.metric{background:#eaf5ef;padding:12px 5px;border-radius:12px;text-align:center}.metric b{display:block;font-size:20px}button{border:0;background:#167455;color:white;border-radius:12px;padding:12px;font-weight:650;cursor:pointer}input{font-size:16px;padding:10px;border:1px solid #d1ddd6;border-radius:10px;width:100%;box-sizing:border-box}label{display:block;margin:10px 0 5px;font-weight:600}.exercise{display:flex;gap:10px;align-items:center;padding:12px 0;border-bottom:1px solid #e8efeb}.exercise input{width:22px;height:22px;accent-color:#167455}.exercise span{flex:1}.exercise small{display:block;color:#60766b;margin-top:3px}.tabs{position:fixed;bottom:0;left:0;right:0;background:white;display:flex;justify-content:space-around;padding:10px 0 max(10px,env(safe-area-inset-bottom));box-shadow:0 -2px 10px #0001}.tabs button{background:transparent;color:#536b5e;padding:8px;font-size:12px}.tabs button.active{color:#086b48;background:#e9f5ed}section{display:none}section.active{display:block}.row{display:flex;gap:8px}.row>*{flex:1}.hint{font-size:13px;color:#60766b;line-height:1.5}.bar{height:12px;border-radius:10px;background:#e4eee7;overflow:hidden}.fill{height:100%;background:#27a575;width:0}.history{font-size:14px;line-height:1.9}#status{font-size:13px;color:#3e6855}</style></head><body><header><small>YOUR PERSONAL FITNESS COMPANION</small><h1>My Transformation 💪</h1><div id="today"></div></header><main class="wrap"><section id="home" class="active"><div class="card"><h2>Your journey</h2><div class="metrics"><div class="metric"><b id="currentWeight">95</b><small>Current kg</small></div><div class="metric"><b>75</b><small>Goal kg</small></div><div class="metric"><b id="lost">0</b><small>Lost kg</small></div></div><p class="hint" id="goalText"></p><div class="bar"><div class="fill" id="progress"></div></div></div><div class="card"><h2>Today's plan</h2><p id="workoutTitle"></p><p class="hint">Beginner-friendly, approximately 35–45 minutes including warm-up and cool-down. Move at a comfortable pace.</p><button onclick="tab('workout')">Open workout →</button></div><div class="card"><h2>Daily habits</h2><div id="habits"></div></div></section><section id="workout"><div class="card"><h2 id="dayTitle"></h2><p class="hint">Warm up 5 minutes: march in place, shoulder circles and gentle mobility. Rest 60–90 seconds between sets. Stop if you feel sharp pain, dizziness or chest discomfort.</p><div id="exercises"></div><p class="hint">Cool down 5 minutes with easy walking and gentle stretching.</p><button onclick="finishWorkout()">Complete today's workout</button><p id="workoutDone"></p></div></section><section id="diet"><div class="card"><h2>Simple meal guide</h2><p><b>Breakfast:</b> Eggs or curd, fruit, and oats or whole-grain roti.</p><p><b>Lunch:</b> Roti/rice, vegetables, dal, and chicken/fish/eggs or paneer.</p><p><b>Snack:</b> Fruit with curd or roasted chana.</p><p><b>Dinner:</b> Lean protein, vegetables and a moderate portion of roti/rice.</p><p class="hint">Start with consistent portions and sufficient protein. This is a general guide, not a prescribed calorie target.</p></div><div class="card"><h2>Water tracker</h2><div class="metrics"><div class="metric"><b id="waterCount">0</b><small>Glasses today</small></div></div><p class="hint">Each glass is approximately 250 mL.</p><button onclick="water(1)">+ Add glass</button> <button onclick="water(-1)" style="background:#65786d">− Remove</button></div></section><section id="progressTab"><div class="card"><h2>Log measurements</h2><label for="weight">Weight (kg)</label><input id="weight" type="number" step="0.1" min="30" max="300" placeholder="e.g. 94.5"><label for="waist">Waist (inches, optional)</label><input id="waist" type="number" step="0.1" min="15" max="90" placeholder="e.g. 41.5"><p><button onclick="saveMeasurement()">Save measurement</button></p></div><div class="card"><h2>Measurement history</h2><div class="history" id="history"></div></div><div class="card"><h2>Backup your data</h2><p class="hint">Data is saved in this browser on this device. Clearing website data or deleting the app may erase it. Export a backup regularly.</p><button onclick="exportData()">Export JSON backup</button><label for="restore">Restore a backup</label><input id="restore" type="file" accept="application/json,.json" onchange="restoreData(event)"><p id="status"></p></div></section></main><nav class="tabs"><button class="active" data-tab="home" onclick="tab('home')">⌂ Home</button><button data-tab="workout" onclick="tab('workout')">🏋 Workout</button><button data-tab="diet" onclick="tab('diet')">🥗 Diet</button><button data-tab="progressTab" onclick="tab('progressTab')">📈 Progress</button></nav><script src="app.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0f3f36">
+  <meta name="color-scheme" content="light dark">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Transform Pro">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="description" content="Private, offline-first body transformation and fitness tracker for iPhone.">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png">
+  <link rel="stylesheet" href="./styles.css">
+  <title>Transform Pro</title>
+</head>
+<body>
+  <svg class="svg-sprite" aria-hidden="true">
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.8 12 3l9 7.8v9.4a.8.8 0 0 1-.8.8h-5.4v-6.2H9.2V21H3.8a.8.8 0 0 1-.8-.8z"/></symbol>
+    <symbol id="i-dumbbell" viewBox="0 0 24 24"><path d="M5 7v10M2.5 9.3v5.4M19 7v10m2.5-7.7v5.4M5 12h14"/></symbol>
+    <symbol id="i-apple" viewBox="0 0 24 24"><path d="M16.8 8.2c-1.2-.7-2.8-.9-4.1 0-1.2-.8-2.9-.7-4.2.1C5.8 10 6.2 15 8.4 18.6c1 1.7 2.2 2.6 3.4 2.4.5-.1 1.1-.5 1.8-.5s1.2.4 1.8.5c1.2.2 2.4-.8 3.4-2.5.8-1.3 1.3-2.6 1.5-3.9-2.3-.9-3.1-3.7-1.5-5.5-.6-.5-1.3-.8-2-.9Z"/><path d="M15.4 3c.1 1.7-.9 3.3-2.6 4 .1-1.7 1-3.1 2.6-4Z"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V10m5 10V4m6 16v-7m5 7V7"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><path d="M12 8.4a3.6 3.6 0 1 0 0 7.2 3.6 3.6 0 0 0 0-7.2Z"/><path d="m19.4 13.5 1.3 1-.9 2.2-1.7-.2a7 7 0 0 1-1.6 1.6l.2 1.7-2.2.9-1-1.3a7.7 7.7 0 0 1-2.2 0l-1 1.3-2.2-.9.2-1.7a7 7 0 0 1-1.6-1.6l-1.7.2-.9-2.2 1.3-1a7.7 7.7 0 0 1 0-2.2l-1.3-1 .9-2.2 1.7.2a7 7 0 0 1 1.6-1.6L8.1 5l2.2-.9 1 1.3a7.7 7.7 0 0 1 2.2 0l1-1.3 2.2.9-.2 1.7a7 7 0 0 1 1.6 1.6l1.7-.2.9 2.2-1.3 1a7.7 7.7 0 0 1 0 2.2Z"/></symbol>
+    <symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 2S5.5 9.6 5.5 14.7A6.5 6.5 0 0 0 12 21a6.5 6.5 0 0 0 6.5-6.3C18.5 9.6 12 2 12 2Z"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 15.8A8.5 8.5 0 0 1 8.2 4 8.7 8.7 0 1 0 20 15.8Z"/></symbol>
+    <symbol id="i-steps" viewBox="0 0 24 24"><path d="M8.2 3.2c1.5.4 2.2 2.4 1.5 4.3-.7 2-2.5 3.2-4 2.7-1.5-.4-2.2-2.4-1.5-4.3.7-2 2.5-3.2 4-2.7Zm8.6 9.5c1.5.4 2.2 2.4 1.5 4.3-.7 2-2.5 3.2-4 2.7-1.5-.4-2.2-2.4-1.5-4.3.7-2 2.5-3.2 4-2.7Z"/><path d="M4.8 11.5c2.7-.4 5.4.8 7 3M12.2 9.5c2.6-.3 5.1.8 6.7 2.9"/></symbol>
+    <symbol id="i-flame" viewBox="0 0 24 24"><path d="M13 2c1.1 4-1.4 5.7-2.9 7.8-1.2 1.7-1.1 3.6.2 4.7-.2-2 1.1-3.2 2.4-4.4 2.2 1.8 4.1 4.2 3.7 7.1-.4 2.8-2.5 4.8-5.5 4.8-4 0-7-2.8-7-7 0-4.8 3.5-7.7 9.1-13Z"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.2 4.2L19 7"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7Z"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14m8-14v14"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 10v6m0-9h.01"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-4-4 4 4 4-4M4 20h16"/></symbol>
+    <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V4m-4 4 4-4 4 4M4 20h16"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16m-10 4v6m4-6v6M8 7l1-3h6l1 3m2 0-1 14H7L6 7"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M18.5 9A7.5 7.5 0 0 0 6 6.5L4 9m2 6a7.5 7.5 0 0 0 12.5 2.5L20 15"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><path d="M5 4h14a2 2 0 0 1 2 2v14H3V6a2 2 0 0 1 2-2Zm2-2v4m10-4v4M3 9h18"/></symbol>
+    <symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="5"/><path d="m8.5 12-2 9 5.5-3 5.5 3-2-9"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 2 4.5 5v6c0 5.1 3 8.5 7.5 11 4.5-2.5 7.5-5.9 7.5-11V5Z"/><path d="m8.5 12 2.2 2.2 4.8-5"/></symbol>
+    <symbol id="i-wifi" viewBox="0 0 24 24"><path d="M3 8.5a14 14 0 0 1 18 0M6.5 12a9 9 0 0 1 11 0M10 15.5a4 4 0 0 1 4 0M12 19h.01"/></symbol>
+    <symbol id="i-wifi-off" viewBox="0 0 24 24"><path d="m3 3 18 18M5 8.5A14 14 0 0 1 18.2 7M7 12a9 9 0 0 1 5.7-1.7M10.5 15.2a4 4 0 0 1 3.5.3M12 19h.01"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+    <symbol id="i-share" viewBox="0 0 24 24"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="m8.2 10.8 7.6-4.5m-7.6 6.9 7.6 4.5"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
+    <symbol id="i-scale" viewBox="0 0 24 24"><path d="M5 4h14a2 2 0 0 1 2 2v14H3V6a2 2 0 0 1 2-2Z"/><path d="M8 10a4 4 0 0 1 8 0m-4 0 2-2"/></symbol>
+    <symbol id="i-ruler" viewBox="0 0 24 24"><path d="m4 17 13-13 3 3L7 20H4Z"/><path d="m13 8 3 3m-6 0 2 2m-5 1 2 2"/></symbol>
+    <symbol id="i-edit" viewBox="0 0 24 24"><path d="m4 16.5-.7 4.2 4.2-.7L19 8.5 15.5 5Z"/><path d="m13.5 7 3.5 3.5"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M5 17h14l-1.5-2V10a5.5 5.5 0 0 0-11 0v5Zm5 3h4"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></symbol>
+  </svg>
+
+  <div id="splash" class="splash" aria-hidden="true">
+    <div class="splash-logo">T</div>
+    <strong>Transform Pro</strong>
+    <span>Preparing your private fitness dashboard…</span>
+  </div>
+
+  <div id="updateBanner" class="update-banner" hidden>
+    <span>A new version is ready.</span>
+    <button type="button" data-action="apply-update">Update now</button>
+  </div>
+
+  <header class="app-header">
+    <div class="brand-row">
+      <div class="brand-mark" aria-hidden="true">T</div>
+      <div class="brand-copy">
+        <small id="headerEyebrow">BODY TRANSFORMATION</small>
+        <strong id="headerTitle">Good evening, Rakesh</strong>
+      </div>
+      <button id="connectionBadge" class="connection-badge" type="button" data-action="show-connection" aria-label="Connection status">
+        <svg><use href="#i-wifi"></use></svg><span>Online</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="mainContent" class="app-main" tabindex="-1">
+    <section id="view-home" class="view active" data-view="home" aria-label="Dashboard"></section>
+    <section id="view-workout" class="view" data-view="workout" aria-label="Workout"></section>
+    <section id="view-nutrition" class="view" data-view="nutrition" aria-label="Nutrition"></section>
+    <section id="view-progress" class="view" data-view="progress" aria-label="Progress"></section>
+    <section id="view-ai" class="view" data-view="ai" aria-label="AI Coach"></section>
+    <section id="view-settings" class="view" data-view="settings" aria-label="Settings"></section>
+  </main>
+
+  <nav class="bottom-nav" aria-label="Primary navigation">
+    <button class="nav-item active" type="button" data-route="home" aria-current="page">
+      <svg><use href="#i-home"></use></svg><span>Home</span>
+    </button>
+    <button class="nav-item" type="button" data-route="workout">
+      <svg><use href="#i-dumbbell"></use></svg><span>Workout</span>
+    </button>
+    <button class="nav-item" type="button" data-route="nutrition">
+      <svg><use href="#i-apple"></use></svg><span>Nutrition</span>
+    </button>
+    <button class="nav-item" type="button" data-route="progress">
+      <svg><use href="#i-chart"></use></svg><span>Progress</span>
+    </button>
+    <button class="nav-item" type="button" data-route="ai">
+      <svg><use href="#i-target"></use></svg><span>AI Coach</span>
+    </button>
+    <button class="nav-item" type="button" data-route="settings">
+      <svg><use href="#i-settings"></use></svg><span>More</span>
+    </button>
+  </nav>
+
+  <div id="restTimer" class="rest-timer" hidden>
+    <div>
+      <small>REST TIMER</small>
+      <strong id="restTimerValue">01:00</strong>
+    </div>
+    <button type="button" class="icon-button" data-action="cancel-rest" aria-label="Cancel rest timer"><svg><use href="#i-close"></use></svg></button>
+  </div>
+
+  <div id="modalBackdrop" class="modal-backdrop" hidden>
+    <div id="modalPanel" class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle"></div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <input id="restoreInput" type="file" accept="application/json,.json" hidden>
+
+  <script src="./app.js" defer></script>
+  <script src="./ai.js" defer></script>
+</body>
+</html>

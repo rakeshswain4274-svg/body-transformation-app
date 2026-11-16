@@ -1,0 +1,17 @@
+TRANSFORM PRO V2.0 - SAFE UPGRADE GUIDE
+
+1. Open the current installed fitness app.
+2. Go to Progress and export a JSON backup if you have already entered records.
+3. Extract the Transform Pro ZIP in the iPhone Files app.
+4. Open GitHub > body-transformation-app > Add file > Upload files.
+5. Select every file inside the extracted folder and commit the changes to main.
+6. Wait until GitHub Pages completes deployment.
+7. Fully close the old Home Screen app from the iPhone App Switcher.
+8. Reopen the app. If the old design remains, close and reopen it once more.
+9. Version 2 automatically migrates compatible version 1 measurements, water and workout completion records.
+10. Open More > Check for app update if the new update banner appears later.
+
+IMPORTANT
+- Do not clear Safari website data before creating a backup.
+- Replacing GitHub files does not normally erase local fitness records.
+- Backup files contain personal data and should be stored privately.
